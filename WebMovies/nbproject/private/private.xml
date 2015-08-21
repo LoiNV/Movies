@@ -3,12 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SEM%204/Asignment2/Movies/WebMovies/src/java/controller/CategoryJpaController.java</file>
-            <file>file:/D:/SEM%204/Asignment2/Movies/WebMovies/src/java/entities/Film.java</file>
-            <file>file:/D:/SEM%204/Asignment2/Movies/WebMovies/web/index.html</file>
-            <file>file:/D:/SEM%204/Asignment2/Movies/WebMovies/src/java/servlet/CreateCategory.java</file>
-            <file>file:/D:/SEM%204/Asignment2/Movies/WebMovies/src/java/entities/Category.java</file>
-            <file>file:/D:/SEM%204/Asignment2/Movies/WebMovies/src/java/entities/Booking.java</file>
+            <file>file:/D:/SEM%204/Asignment2/Movies/WebMovies/web/admin/editCategory.jsp</file>
+            <file>file:/D:/SEM%204/Asignment2/Movies/WebMovies/src/java/servlet/AllFilmsServlet.java</file>
+            <file>file:/D:/SEM%204/Asignment2/Movies/WebMovies/web/admin/editFilm.jsp</file>
+            <file>file:/D:/SEM%204/Asignment2/Movies/WebMovies/src/java/controller/FilmJpaController.java</file>
+            <file>file:/D:/SEM%204/Asignment2/Movies/WebMovies/src/java/servlet/AllCategoriesServlet.java</file>
+            <file>file:/D:/SEM%204/Asignment2/Movies/WebMovies/web/admin/viewCategories.jsp</file>
+            <file>file:/D:/SEM%204/Asignment2/Movies/WebMovies/web/admin/index.jsp</file>
+            <file>file:/D:/SEM%204/Asignment2/Movies/WebMovies/src/java/servlet/CreateCategoryServlet.java</file>
+            <file>file:/D:/SEM%204/Asignment2/Movies/WebMovies/src/java/servlet/CreateFilmServlet.java</file>
         </group>
     </open-files>
 </project-private>

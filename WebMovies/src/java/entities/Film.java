@@ -92,8 +92,12 @@ public class Film implements Serializable {
     public Film() {
     }
 
-    public Film( String name, String openning, String descript, String img, String linkVideo, boolean isHot, double price) {
-        
+    public Film(Integer id) {
+        this.id = id;
+    }
+
+    public Film(Integer id, String name, String openning, String descript, String img, String linkVideo, boolean isHot, double price) {
+        this.id = id;
         this.name = name;
         this.openning = openning;
         this.descript = descript;

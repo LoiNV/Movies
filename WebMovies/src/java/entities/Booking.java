@@ -9,8 +9,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -40,7 +38,6 @@ public class Booking implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
@@ -69,7 +66,12 @@ public class Booking implements Serializable {
     public Booking() {
     }
 
-    public Booking( String name, int phone, String email, int qualtity) {        
+    public Booking(Integer id) {
+        this.id = id;
+    }
+
+    public Booking(Integer id, String name, int phone, String email, int qualtity) {
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
