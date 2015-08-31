@@ -24,34 +24,23 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
+
 public class AllFilmsServlet extends HttpServlet {
     @PersistenceUnit(unitName = "WebMoviesPU")
     private EntityManagerFactory emf;
     @Resource
     private javax.transaction.UserTransaction utx;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        FilmJpaController fjc = new FilmJpaController(utx, emf);
-        
+        FilmJpaController fjc = new FilmJpaController(utx, emf);        
         List<Film> list = fjc.findFilmEntities(); 
         request.setAttribute("listFilm", list);
-        for (Film f : list) {
-            System.out.println(f.getIsHot()+"");
-        }
+              
         CategoryJpaController cjc = new CategoryJpaController(utx, emf);
-        List<Category> listC = cjc.findCategoryEntities();
-        
+        List<Category> listC = cjc.findCategoryEntities();        
         request.setAttribute("listCategories", listC);
         
         RequestDispatcher rd = request.getRequestDispatcher("admin/index.jsp");

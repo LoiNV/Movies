@@ -37,32 +37,22 @@ public class BookingJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Booking booking) throws PreexistingEntityException, RollbackFailureException, Exception {
+    public void create(Booking booking) {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            Film movieId = booking.getMovieId();
-            if (movieId != null) {
-                movieId = em.getReference(movieId.getClass(), movieId.getId());
-                booking.setMovieId(movieId);
-            }
-            em.persist(booking);
-            if (movieId != null) {
-                movieId.getBookingCollection().add(booking);
-                movieId = em.merge(movieId);
-            }
+            Query q = em.createNativeQuery("INSERT INTO tbl_Booking VALUES (?,?,?,?,?,?)");
+            q.setParameter(1, booking.getName());
+            q.setParameter(2, booking.getPhone());
+            q.setParameter(3, booking.getEmail());
+            q.setParameter(4, booking.getMovieId().getId());
+            q.setParameter(5, booking.getQualtity());
+            q.setParameter(6, booking.getOpenTime());
+            q.executeUpdate();
             utx.commit();
         } catch (Exception ex) {
-            try {
-                utx.rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            if (findBooking(booking.getId()) != null) {
-                throw new PreexistingEntityException("Booking " + booking + " already exists.", ex);
-            }
-            throw ex;
+           ex.printStackTrace();
         } finally {
             if (em != null) {
                 em.close();
@@ -70,42 +60,15 @@ public class BookingJpaController implements Serializable {
         }
     }
 
-    public void edit(Booking booking) throws NonexistentEntityException, RollbackFailureException, Exception {
+    public void edit(Booking booking) {
         EntityManager em = null;
         try {
             utx.begin();
-            em = getEntityManager();
-            Booking persistentBooking = em.find(Booking.class, booking.getId());
-            Film movieIdOld = persistentBooking.getMovieId();
-            Film movieIdNew = booking.getMovieId();
-            if (movieIdNew != null) {
-                movieIdNew = em.getReference(movieIdNew.getClass(), movieIdNew.getId());
-                booking.setMovieId(movieIdNew);
-            }
-            booking = em.merge(booking);
-            if (movieIdOld != null && !movieIdOld.equals(movieIdNew)) {
-                movieIdOld.getBookingCollection().remove(booking);
-                movieIdOld = em.merge(movieIdOld);
-            }
-            if (movieIdNew != null && !movieIdNew.equals(movieIdOld)) {
-                movieIdNew.getBookingCollection().add(booking);
-                movieIdNew = em.merge(movieIdNew);
-            }
+            em = getEntityManager();            
+            booking = em.merge(booking);            
             utx.commit();
         } catch (Exception ex) {
-            try {
-                utx.rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            String msg = ex.getLocalizedMessage();
-            if (msg == null || msg.length() == 0) {
-                Integer id = booking.getId();
-                if (findBooking(id) == null) {
-                    throw new NonexistentEntityException("The booking with id " + id + " no longer exists.");
-                }
-            }
-            throw ex;
+           ex.printStackTrace();
         } finally {
             if (em != null) {
                 em.close();
@@ -113,33 +76,16 @@ public class BookingJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
+    public void destroy(Integer id) {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            Booking booking;
-            try {
-                booking = em.getReference(Booking.class, id);
-                booking.getId();
-            } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The booking with id " + id + " no longer exists.", enfe);
-            }
-            Film movieId = booking.getMovieId();
-            if (movieId != null) {
-                movieId.getBookingCollection().remove(booking);
-                movieId = em.merge(movieId);
-            }
+            Booking booking = em.getReference(Booking.class, id);            
             em.remove(booking);
             utx.commit();
         } catch (Exception ex) {
-            try {
-                utx.rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            throw ex;
-        } finally {
+            ex.printStackTrace();
             if (em != null) {
                 em.close();
             }

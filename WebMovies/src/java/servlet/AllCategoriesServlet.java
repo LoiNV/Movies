@@ -6,15 +6,11 @@
 package servlet;
 
 import controller.CategoryJpaController;
-import controller.exceptions.RollbackFailureException;
 import entities.Category;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceUnit;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,15 +28,6 @@ public class AllCategoriesServlet extends HttpServlet {
     @Resource
     private javax.transaction.UserTransaction utx;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CategoryJpaController cjc = new CategoryJpaController(utx,emf);

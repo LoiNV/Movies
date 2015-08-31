@@ -1,0 +1,18 @@
+SMAP
+moviePage_jsp.java
+JSP
+*S JSP
+*F
++ 0 moviePage.jsp
+moviePage.jsp
++ 1 header.jsp
+header.jsp
++ 2 search.jsp
+search.jsp
+*L
+5,35:50
+1#1,102:85
+39#0,2:187
+1#2,15:189
+40#0,176:203
+*E

@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>loginFilter</filter-name>
+        <filter-class>filter.LoginFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>BookFilter</filter-name>
+        <filter-class>filter.BookFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>HomeFilter</filter-name>
+        <filter-class>filter.HomeFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HomeFilter</filter-name>
+        <url-pattern>/index.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>BookFilter</filter-name>
+        <url-pattern>/booking.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <servlet-name>DoEditServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <servlet-name>EditFilmServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <servlet-name>AllBookingsServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <servlet-name>CreateFilmServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <servlet-name>AllFilmsServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <servlet-name>AllCategoriesServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <servlet-name>CreateCategoryServlet</servlet-name>
+    </filter-mapping>
     <servlet>
         <servlet-name>CreateCategoryServlet</servlet-name>
         <servlet-class>servlet.CreateCategoryServlet</servlet-class>
@@ -16,6 +64,50 @@
         <servlet-name>CreateFilmServlet</servlet-name>
         <servlet-class>servlet.CreateFilmServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AllBookingsServlet</servlet-name>
+        <servlet-class>servlet.AllBookingsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditFilmServlet</servlet-name>
+        <servlet-class>servlet.EditFilmServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DoEditServlet</servlet-name>
+        <servlet-class>servlet.DoEditServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>servlet.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginUserServlet</servlet-name>
+        <servlet-class>servlet.LoginUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>servlet.HomeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SinglePageServlet</servlet-name>
+        <servlet-class>servlet.SinglePageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookingServlet</servlet-name>
+        <servlet-class>servlet.BookingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetBookingServlet</servlet-name>
+        <servlet-class>servlet.GetBookingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchFilmServlet</servlet-name>
+        <servlet-class>servlet.SearchFilmServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CreateCategoryServlet</servlet-name>
         <url-pattern>/CreateCategory</url-pattern>
@@ -26,11 +118,55 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AllFilmsServlet</servlet-name>
-        <url-pattern>/AllFilms</url-pattern>
+        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CreateFilmServlet</servlet-name>
         <url-pattern>/CreateFilm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllBookingsServlet</servlet-name>
+        <url-pattern>/AllBookings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditFilmServlet</servlet-name>
+        <url-pattern>/EditFilm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DoEditServlet</servlet-name>
+        <url-pattern>/DoEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginUserServlet</servlet-name>
+        <url-pattern>/LoginUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/Home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SinglePageServlet</servlet-name>
+        <url-pattern>/SinglePage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookingServlet</servlet-name>
+        <url-pattern>/Booking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetBookingServlet</servlet-name>
+        <url-pattern>/GetBooking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchFilmServlet</servlet-name>
+        <url-pattern>/SearchFilm</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,21 +5,12 @@
  */
 package controller;
 
-import controller.exceptions.IllegalOrphanException;
-import controller.exceptions.NonexistentEntityException;
-import controller.exceptions.PreexistingEntityException;
-import controller.exceptions.RollbackFailureException;
 import entities.Category;
 import java.io.Serializable;
 import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import entities.Film;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
@@ -42,7 +33,7 @@ public class CategoryJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Category category) {
+    public boolean create(Category category) {
         
         EntityManager em = null;
         
@@ -51,19 +42,22 @@ public class CategoryJpaController implements Serializable {
             em = getEntityManager();
             Query q = em.createNativeQuery("INSERT INTO tbl_Category VALUES (?)");
             q.setParameter(1, category.getName());
-            q.executeUpdate();
-            utx.commit();
+            int i = q.executeUpdate();
+            if (i>0) {
+                utx.commit();
+                return true;
+            }
         } catch (Exception ex) {
-            
             ex.printStackTrace();
         } finally {
             if (em != null) {
                 em.close();
             }
         }
+        return false;
     }
 
-    public void edit(int id ,String name) {
+    public boolean edit(int id ,String name) {
         EntityManager em = null;
         try {
             utx.begin();
@@ -72,8 +66,11 @@ public class CategoryJpaController implements Serializable {
             
             q.setParameter("id", id);
             q.setParameter("name", name);
-            q.executeUpdate();
-            utx.commit();
+            int i = q.executeUpdate();
+            if (i>0) {
+                utx.commit();
+                return true;
+            }
         } catch (Exception ex) {
             
             ex.printStackTrace();
@@ -82,9 +79,10 @@ public class CategoryJpaController implements Serializable {
                 em.close();
             }
         }
+        return false;
     }
 
-    public void destroy(Integer id) {
+    public boolean destroy(Integer id) {
         EntityManager em = null;
         try {
             utx.begin();
@@ -92,8 +90,11 @@ public class CategoryJpaController implements Serializable {
             Query q = em.createQuery("DELETE FROM Category c WHERE c.id = :id");
             
             q.setParameter("id", id);
-            q.executeUpdate();
-            utx.commit();
+            int i = q.executeUpdate();
+            if (i>0) {
+                utx.commit();
+                return true;
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -101,6 +102,7 @@ public class CategoryJpaController implements Serializable {
                 em.close();
             }
         }
+        return false;
     }
 
     public List<Category> findCategoryEntities() {

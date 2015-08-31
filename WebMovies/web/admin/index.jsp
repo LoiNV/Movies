@@ -14,7 +14,7 @@
         <title>Film Admin - Films</title>        
 
     </head>
-    <body>
+    <body>       
         <div id="wrapper">
             <%@include file="adminTemplate.jsp" %>
             <div id="page-wrapper">
@@ -45,9 +45,9 @@
                                     <td>${f.price}</td>
                                     <td>${f.isHot}</td>
                                     <td style="text-align: center">
-                                        <a onclick="return confirm('Are you sure?')" href="CreateFilm?id=${f.id}&evt=delete"><div class="fa fa-remove"> </div></a> | 
-                                        <a href="CreateFilm?id=${f.id}&evt=edit"> <div class="fa fa-edit"> </div></a> | 
-                                        <a href="#"><div class="fa fa-search"> </div></a>
+                                        <a onclick="return confirm('Are you sure?')" href="EditFilm?id=${f.id}&evt=delete"><div class="fa fa-remove"> </div></a> | 
+                                        <a href="EditFilm?id=${f.id}&evt=edit"> <div class="fa fa-edit"> </div></a>
+                                        <!--<a href="#"><div class="fa fa-search"> </div></a>-->
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -67,7 +67,7 @@
                         <h4 class="modal-title">Create</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="CreateFilm?evt=create" class="form-horizontal">
+                        <form method="post" enctype="multipart/form-data" action="CreateFilm" class="form-horizontal">
                             <div class="form-group">
                                 <label class="col-xs-2 control-label">FilmName</label>
                                 <div class="col-xs-7">
@@ -75,18 +75,19 @@
 
                                 </div>
                             </div>                            
-                            
+
                             <div class="form-group">
                                 <label class="col-xs-2 control-label">Image</label>
-                                <div class="col-xs-6 ">                                    
-                                    <input class="form-control" name="imgPath" required/>                                    
+                                <div class="col-xs-7 ">                                    
+                                    <input type="file" class="form-control" name="file"/>                                    
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="col-xs-2 control-label">Trailer</label>
-                                <div class="col-xs-5 ">                                    
-                                    <input class="form-control" name="linkTrailer" required/>                                    
+                                <div class="col-xs-6 ">      
+                                    <div id="trailer"></div>
+                                    <input value="" onchange="document.getElementById('trailer').innerHTML = this.value;" class="form-control" name="linkVideo"/>                                    
                                 </div>
                             </div>
 
@@ -103,7 +104,7 @@
                                 <script type="text/javascript">
                                     $(function () {
                                         $('#datetimepicker').datetimepicker({
-                                            format: 'DD/MM/YYYY - HH:mm'
+                                            format: 'DD/MM/YYYY'
                                         });
                                     });
                                 </script>
@@ -140,7 +141,7 @@
 
                             <div class="form-group">
                                 <label class="col-xs-2 control-label">Description</label>
-                                <div class="col-xs-8">
+                                <div class="col-xs-7">
                                     <textarea id="description" name="description" class="form-control" required></textarea>
                                     <script type="text/javascript">
                                         CKEDITOR.replace('description')

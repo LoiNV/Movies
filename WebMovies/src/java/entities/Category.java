@@ -106,7 +106,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return this.getName();
+        return this.name;
     }
     
 }

@@ -46,8 +46,8 @@
                     </table>
                 </div>
             </div>
-
         </div>
+                
         <!-- Modal Create -->
         <div id="createModal" class="modal fade">
             <div class="modal-dialog">
@@ -61,7 +61,7 @@
                             <div class="form-group">
                                 <label class="col-xs-2 control-label">Category</label>
                                 <div class="col-xs-4">
-                                    <input class="form-control" name="createName" required/>
+                                    <input type="text" class="form-control" name="createName" required/>
                                 </div>
                             </div>
 

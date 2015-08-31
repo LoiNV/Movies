@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -38,6 +40,7 @@ public class Booking implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
@@ -59,6 +62,10 @@ public class Booking implements Serializable {
     @NotNull
     @Column(name = "qualtity")
     private int qualtity;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "openTime")
+    private String openTime;
     @JoinColumn(name = "movie_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Film movieId;
@@ -116,6 +123,14 @@ public class Booking implements Serializable {
 
     public void setQualtity(int qualtity) {
         this.qualtity = qualtity;
+    }
+
+    public String getOpenTime() {
+        return openTime;
+    }
+
+    public void setOpenTime(String openTime) {
+        this.openTime = openTime;
     }
 
     public Film getMovieId() {

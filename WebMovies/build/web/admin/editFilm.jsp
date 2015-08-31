@@ -17,30 +17,34 @@
             <%@include file="adminTemplate.jsp" %>
             <div id="page-wrapper">
                 
-                <form method="post" class="form-horizontal" action="CreateFilm?evt=doEdit&id=${film.id}">
+                <form method="post" class="form-horizontal" enctype="multipart/form-data" action="DoEdit">
                     <div class="form-group">
                         <label class="col-xs-2 control-label"><h2>Edit Film</h2></label>
                     </div>
+                    <input type="hidden" name="id" value="${film.id}"/>
                     <div class="form-group">
                         <label class="col-xs-2 control-label">Name</label>
-                        <div class="col-xs-7">
+                        <div class="col-xs-6">
                             <input value="${film.name}" class="form-control" name="name" maxlength="50" required/>
                         </div>
                     </div>                            
 
                     <div class="form-group">
                         <label class="col-xs-2 control-label">Image</label>
-                        <div class="col-xs-6 ">                                    
-                            <input value="${film.img}" class="form-control" name="imgPath" required/>                                    
+                        <div class="col-xs-6 ">
+                            <div id="img"><img  src="${film.img}"/></div>
+                            <input type="hidden" name="img" id="img" value=""/>
+                            <input type="file" class="form-control" name="file" onchange="document.getElementById('img').value = 'changed'"/>
                         </div>
                     </div>
-
+                    
                     <div class="form-group">
                         <label class="col-xs-2 control-label">Trailer</label>
-                        <div class="col-xs-5 ">                                    
-                            <input value="${film.linkVideo}" class="form-control" name="linkTrailer" required/>                                    
+                        <div class="col-xs-6 ">      
+                            <div id="trailer">${film.linkVideo}</div>
+                            <input value="" onchange="document.getElementById('trailer').innerHTML = this.value;" placeholder="New Trailer" class="form-control" name="linkVideo"/>                                    
                         </div>
-                    </div>
+                    </div>                    
 
                     <div class="form-group">
                         <label class="col-xs-2 control-label">OpenDay</label>
@@ -55,7 +59,7 @@
                         <script type="text/javascript">
                             $(function () {
                                 $('#datetimepicker').datetimepicker({
-                                    format: 'DD/MM/YYYY - HH:mm'
+                                    format: 'DD/MM/YYYY'
                                 });
                             });
                         </script>
@@ -101,7 +105,7 @@
 
                     <div class="form-group">
                         <label class="col-xs-2 control-label">Description</label>
-                        <div class="col-xs-8">
+                        <div class="col-xs-7">
                             <textarea id="description" name="description" class="form-control" required>${film.descript}</textarea>
                             <script type="text/javascript">
                                 CKEDITOR.replace('description')

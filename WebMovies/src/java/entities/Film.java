@@ -67,7 +67,7 @@ public class Film implements Serializable {
     private String descript;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 1073741823)
     @Column(name = "img")
     private String img;
     @Basic(optional = false)
@@ -210,7 +210,7 @@ public class Film implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Film[ id=" + id + " ]";
+        return this.name;
     }
     
 }
