@@ -51,13 +51,13 @@
                                     <span class="ticket__item">Ticket number <strong class="ticket__number">a126bym4</strong></span>
                                     <span class="ticket__item ticket__date">${book.movieId.openning}</span>
                                     <span class="ticket__item ticket__time">${book.openTime}</span>
-                                    <span class="ticket__item">Cinema: <span class="ticket__cinema">Cineworld</span></span>
+                                    <span class="ticket__item">Quantity: <span class="ticket__cinema">${book.qualtity}</span></span>
                                     <span class="ticket__item ticket__price">price: <strong class="ticket__cost">$${book.movieId.price}</strong></span>
                                 </div>
 
                                 <div class="ticket-primery">
                                     <span class="ticket__item ticket__item--primery ticket__film">Film<br><strong class="ticket__movie">${book.movieId}</strong></span>
-                                    <span class="ticket__item ticket__item--primery">Sits: <span class="ticket__place">11F, 12F, 13F</span></span>
+                                    <span class="ticket__item ticket__item--primery">Total: <span class="ticket__place">$${book.movieId.price*book.qualtity}</span></span>
                                 </div>
 
 
